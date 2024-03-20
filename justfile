@@ -1,5 +1,5 @@
-@deploy: tidy build
-	mv "./ghydra" ~/.local/bin
+@install: tidy
+	go install
 
 @run: tidy
 	go run .

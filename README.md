@@ -20,7 +20,7 @@ This should add ghydra to your `go env GOPATH`, usually `~/go/bin/`, which shoul
 
 ## Configuration
 
-Ghydra uses a toml based configuration with the following style:
+Ghydra looks for a configuration file in `$HOME/ghydra/config.toml` or `$XDG_CONFIG_HOME/ghydra/config.toml` uses a toml based configuration with the following style:
 
 ```toml
 # You can also configure the colors from the top-level menu
@@ -50,8 +50,6 @@ key = "m"
 [[menu]] # Another top-level menu
 desc = "This menu is on the root level"
 key = "l"
-
-
 ```
 
 As a tree, the menu will look something like this:

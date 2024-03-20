@@ -68,8 +68,7 @@ eval (ghydra)
 To setup a keybind to execute Ghydra and run the selected program:
 
 ```fish
-	bind \cx 'eval (ghydra
-)'
+	bind \cx 'eval (ghydra)'
 ```
 
 ## Acknowledgements

@@ -6,6 +6,18 @@ Ghydra is a terminal-based program to run other commands through user-defined me
 
 When Ghydra executes, an interface with a set of keybinds and their descriptions shows up. The user is then prompted to select an option or terminate the program with `C-c`.
 
+## Installation
+
+Ghydra requires the go compiler currently. To install clone the repository:
+
+```
+git clone https://github.com/henriqpsantos/ghydra
+cd ghydra
+go install
+```
+
+This should add ghydra to your `go env GOPATH`, usually `~/go/bin/`, which should be in your `$PATH` environment variable.
+
 ## Configuration
 
 Ghydra uses a toml based configuration with the following style:

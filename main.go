@@ -12,6 +12,7 @@ import (
 	"golang.org/x/term"
 )
 
+// Color defaults
 const (
 	KeyColor    = "#A0D8EE"
 	SepColor    = "#888888"
@@ -19,6 +20,8 @@ const (
 	HeaderColor = "#A0D8EE"
 )
 
+// Number of columns
+// TODO: Make this configurable
 const ncols = 3
 
 type command struct {
@@ -56,29 +59,29 @@ func (m model) Init() tea.Cmd {
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
-		keypress := msg.String()
+		key := msg.String()
+		if key == "ctrl+c" {
+			return m, tea.Quit
+		}
 		cMenu := *m.CurrentMenu
 		for _, c := range cMenu.Menu {
-			if c.Key == keypress {
+			if c.Key == key {
 				m.CurrentMenu = &c
 				return m, nil
 			}
 		}
 		for _, c := range cMenu.Action {
-			if c.Key == keypress {
+			if c.Key == key {
 				fmt.Fprintln(os.Stdout, c.Command)
 				return m, tea.Quit
 			}
-		}
-		switch msg.String() {
-		case "ctrl+c":
-			return m, tea.Quit
 		}
 	}
 	return m, nil
 }
 
-func getKeyString(key, desc string, keyStyle, desStyle, parStyle lipgloss.Style) string {
+// Rendering helper
+func GetKeyString(key, desc string, keyStyle, desStyle, parStyle lipgloss.Style) string {
 	return strings.Join([]string{
 		parStyle.Render("  ["),
 		keyStyle.Render(key),
@@ -91,6 +94,7 @@ func (m model) View() string {
 	if m.err != nil {
 		return "Error: " + m.err.Error() + "\n"
 	}
+	// Style definitions
 	width, _, _ := term.GetSize(int(os.Stderr.Fd()))
 	columnWidth := (width / 3) - 3
 	headerStyle := lipgloss.NewStyle().
@@ -113,12 +117,12 @@ func (m model) View() string {
 	var modeData = make([]string, ncols)
 	var row string
 	for _, k := range c.Menu {
-		row = getKeyString(k.Key, k.Desc, keyStyle, desStyle, parStyle)
+		row = GetKeyString(k.Key, k.Desc, keyStyle, desStyle, parStyle)
 		modeData[i%ncols] += padStyle.Render(row) + "\n"
 		i++
 	}
 	for _, k := range c.Action {
-		row = getKeyString(k.Key, k.Desc, keyStyle, desStyle, parStyle)
+		row = GetKeyString(k.Key, k.Desc, keyStyle, desStyle, parStyle)
 		modeData[i%ncols] += padStyle.Render(row) + "\n"
 		i++
 	}
@@ -135,6 +139,7 @@ func main() {
 		os.Exit(1)
 	}
 
+	// TODO: Define a proper fallback mechanism
 	locations := []string{
 		os.ExpandEnv("$HOME/ghydra/config.toml"),
 		configDir + "/ghydra/config.toml",
@@ -146,6 +151,9 @@ func main() {
 			break
 		}
 	}
+	if configLocation == "" {
+		panic("Error: no configuration file in $XDG_CONFIG_HOME/ghydra/config.toml or $HOME/ghydra/config.toml")
+	}
 
 	// Set default colors
 	var cfg config
@@ -153,8 +161,6 @@ func main() {
 	cfg.HeaderColor = HeaderColor
 	cfg.SepColor = SepColor
 	cfg.DescColor = DescColor
-
-	// TODO: Handle config fallbacks better
 	if _, err := toml.DecodeFile(configLocation, &cfg); err != nil {
 		os.Exit(1)
 	}

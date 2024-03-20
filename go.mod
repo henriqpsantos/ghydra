@@ -1,4 +1,4 @@
-module ghydra
+module github.com/henriqpsantos/ghydra
 
 go 1.20
 

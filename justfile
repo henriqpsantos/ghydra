@@ -1,5 +1,5 @@
 @deploy: tidy build
-	mv "./go-runner" ~/.local/bin
+	mv "./ghydra" ~/.local/bin
 
 @run: tidy
 	go run .

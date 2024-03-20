@@ -136,8 +136,8 @@ func main() {
 	}
 
 	locations := []string{
-		os.ExpandEnv("$HOME/go-runner/config.toml"),
-		configDir + "/go-runner/config.toml",
+		os.ExpandEnv("$HOME/ghydra/config.toml"),
+		configDir + "/ghydra/config.toml",
 	}
 
 	var configLocation string

@@ -1,4 +1,4 @@
-module go-runner
+module ghydra
 
 go 1.20
 

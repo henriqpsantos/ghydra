@@ -2,6 +2,8 @@
 
 A menu-based runner for the commands you don't want to type and can't remember the key-bindings
 
+![](./gifs/showcase.gif)
+
 Ghydra is a terminal-based program to run other commands through user-defined menus. Configuration is based on toml. Ideally, it should hit a sweet spot between the speed of a single key-binding and the ease-of-use of a GUI-like interface.
 
 When Ghydra executes, an interface with a set of keybinds and their descriptions shows up. The user is then prompted to select an option or terminate the program with `C-c`.

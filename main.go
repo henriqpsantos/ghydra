@@ -71,7 +71,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			}
 		}
 		switch msg.String() {
-		case "ctrl+c", "q":
+		case "ctrl+c":
 			return m, tea.Quit
 		}
 	}
@@ -160,10 +160,10 @@ func main() {
 	}
 
 	Menu := menu{
-		"Main:",
-		"",
-		cfg.Action,
-		cfg.Menu,
+		Desc:   "Main:",
+		Key:    "",
+		Action: cfg.Action,
+		Menu:   cfg.Menu,
 	}
 
 	// Model initialization --> config and current menu setup

@@ -64,7 +64,7 @@ Ghydra will output the interface to `stderr` and output the result of whichever 
 eval (ghydra)
 ````
 
-To setup a keybind to execute Ghydra and run the selected program:
+To setup a keybind to execute Ghydra and run the selected program (in this case by pressing `<C-x>`):
 
 ```fish
 bind \cx 'eval (ghydra)'

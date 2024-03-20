@@ -39,14 +39,13 @@ key = "m"
 desc = "This menu is on the root level"
 key = "l"
 
-...
 
 ```
 
 As a tree, the menu will look something like this:
 
 ```
-root
+root menu
  ├── k    > The menu's description 
  │   ├─ r > This action is inside the 'k' menu
  │   ├─ w > This action is also inside the 'k' menu
@@ -68,7 +67,7 @@ eval (ghydra)
 To setup a keybind to execute Ghydra and run the selected program:
 
 ```fish
-	bind \cx 'eval (ghydra)'
+bind \cx 'eval (ghydra)'
 ```
 
 ## Acknowledgements

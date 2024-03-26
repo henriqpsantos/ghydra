@@ -12,8 +12,8 @@ When Ghydra executes, an interface with a set of keybinds and their descriptions
 
 Ghydra requires the go compiler currently. To install clone the repository:
 
-```
-go install https://github.com/henriqpsantos/ghydra@latest
+```bash
+go install github.com/henriqpsantos/ghydra@latest
 ```
 
 This should add ghydra to your `go env GOPATH`, usually `~/go/bin/`, which should be in your `$PATH` environment variable.
